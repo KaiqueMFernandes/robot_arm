@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cmath>
 #include <array>
 #include <Eigen/Geometry>
@@ -10,7 +12,6 @@ namespace robot_arm {
     */
     struct JointState {
         Eigen::Vector2d position = Eigen::Vector2d::Zero();
-        // Angular position in radians; required to calculate P-controller error.
         double angle = 0.0;
         double ang_vel = 0.0; 
     };
