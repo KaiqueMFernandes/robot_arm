@@ -1,3 +1,5 @@
+![under dev badge](https://camo.githubusercontent.com/0a69e0994839d7231356ced4fbad636efce3f65b61023c5ca7ec2860df72c910/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5374617475732d496e253230446576656c6f706d656e742d6f72616e6765)
+
 # Robot arm simulation
 
 A small C++17 simulation of a planar, three-link robot arm. It runs a joint controller and a state logger on separate threads, then writes the simulated joint states to a CSV file. A Python script can display the latest logged pose and joint values while the simulation runs.
