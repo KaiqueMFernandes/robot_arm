@@ -12,20 +12,6 @@ A small C++17 simulation of a planar, three-link robot arm. It runs a joint cont
 - CMake's Threads package
 - Python 3 with `matplotlib` (only for the live plot)
 
-## Build and run
-
-From the repository root:
-
-```sh
-cmake -S . -B build
-cmake --build build
-./build/robot_arm
-```
-
-On Windows, run the generated executable from the `build` directory (for example, `build\\Debug\\robot_arm.exe` with a multi-configuration generator).
-
-The executable simulates for five seconds and writes `output/joint_states.csv`, creating the `output/` directory if needed. Run it from the repository root so that the output file is placed there.
-
 ## Live plot
 
 Install the plotting dependency if needed:
@@ -34,18 +20,25 @@ Install the plotting dependency if needed:
 python3 -m pip install matplotlib
 ```
 
-Start the simulation in one terminal, then in another terminal run:
-
-```sh
-python3 live_logger.py
-```
-
 The plot reads the most recent row from `output/joint_states.csv` approximately every 100 ms. It shows the arm pose, joint angles, and angular velocities. Run the script from the repository root.
 
-## Plots
+## Build and run
 
-This section is reserved for additional plots and visualizations as they are added to the project.
+From the repository root:
 
+```sh
+mkdir build && cd build
+cmake ..
+make
+```
+
+Then call the starter:
+
+```sh
+python3 tools/live_logger.py
+```
+
+The executable simulates for five seconds and writes `output/joint_states.csv`, creating the `output/` directory if needed. Run it from the repository root so that the output file is placed there.
 
 
 ## Output CSV
@@ -70,11 +63,10 @@ joint_3_x,joint_3_y,joint_3_angle,joint_3_ang_vel
 
 ## Repository layout
 
-```text
-include/state.hpp   Joint and arm state definitions
-src/engine.cpp      Simulation loop, integration, threading, and CSV output
-src/controller.cpp  Proportional joint controller
-utilities.hpp       Euler integration and two-link inverse kinematics
-live_logger.py      Live plot of the generated CSV
-CMakeLists.txt      CMake build configuration
-```
+- `include/state.hpp`       - Defines joint and arm state structures.
+- `src/engine.cpp`          - Implements the simulation loop, threaded integration, and CSV output.
+- `src/controller.cpp`      - Implements the proportional joint controller.
+- `utilities.hpp`           - Provides Euler integration and two-link inverse kinematics utilities.
+- `tools/live_logger.py`    - Generates live plots from the simulation's CSV output.
+- `tools/orchestrator.py`   - Launches the simulation and live plotter.
+- `CMakeLists.txt`          - Configures the project build using CMake.
